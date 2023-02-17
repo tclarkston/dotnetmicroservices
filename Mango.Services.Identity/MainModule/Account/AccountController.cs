@@ -263,7 +263,7 @@ namespace IdentityServerHost.Quickstart.UI
                             new Claim(JwtClaimTypes.Email, model.Email),
                             new Claim(JwtClaimTypes.FamilyName, model.LastName),
                             new Claim(JwtClaimTypes.GivenName, model.FirstName),
-                            new Claim(JwtClaimTypes.WebSite, "http://"+model.Username+".com"),
+                            new Claim(JwtClaimTypes.WebSite, $"http://{model.Username}.com"),
                             new Claim(JwtClaimTypes.Role,"User") });
 
                     var context = await _interaction.GetAuthorizationContextAsync(model.ReturnUrl);
