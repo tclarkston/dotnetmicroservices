@@ -95,7 +95,7 @@ namespace IdentityServerHost.Quickstart.UI
             {
                 if (context != null)
                 {
-                    // if the user cancels, send a result back into IdentityServer as if they 
+                    // if the user cancels, send a result back into IdentityServer as if they
                     // denied the consent (even if this client does not require consent).
                     // this will send back an access denied OIDC error response to the client.
                     await _interaction.DenyAuthorizationAsync(context, AuthorizationError.AccessDenied);
@@ -239,7 +239,7 @@ namespace IdentityServerHost.Quickstart.UI
                     Email = model.Email,
                     EmailConfirmed = true,
                     FirstName = model.FirstName,
-                    LastName = model.LastNAme
+                    LastName = model.LastName
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
@@ -261,6 +261,8 @@ namespace IdentityServerHost.Quickstart.UI
                     await _userManager.AddClaimsAsync(user, new Claim[]{
                             new Claim(JwtClaimTypes.Name, model.Username),
                             new Claim(JwtClaimTypes.Email, model.Email),
+                            new Claim(JwtClaimTypes.FamilyName, model.LastName),
+                            new Claim(JwtClaimTypes.GivenName, model.FirstName),
                             new Claim(JwtClaimTypes.WebSite, "http://"+model.Username+".com"),
                             new Claim(JwtClaimTypes.Role,"User") });
 
