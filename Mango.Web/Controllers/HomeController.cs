@@ -47,7 +47,7 @@ namespace Mango.Web.Controllers
 
 
         [Authorize]
-        public async Task<IActionResult> Login()
+        public IActionResult Login()
         {
             return RedirectToAction(nameof(Index));
         }
