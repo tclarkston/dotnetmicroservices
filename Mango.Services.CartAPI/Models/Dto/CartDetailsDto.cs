@@ -10,7 +10,7 @@ namespace Mango.Services.CartAPI.Models.Dto
 
         public int CartHeaderId { get; set; }
         public virtual CartHeaderDto CartHeader { get; set; }
-        public string ProductId { get; set; }
+        public int ProductId { get; set; }
         public virtual ProductDto Product { get; set; }
         public int Count { get; set; }
     }
