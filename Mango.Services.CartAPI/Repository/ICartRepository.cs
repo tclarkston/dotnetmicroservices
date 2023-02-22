@@ -4,9 +4,9 @@ namespace Mango.Services.CartAPI.Repository
 {
     public interface ICartRepository
     {
-        Task<CartDto> GetCartByUserid(string userId);
-        Task<CartDto> CreateUpdateCart(CartDto cart);
-        Task<bool> RemoveFromCart(int cartDetailsId);
-        Task<bool> ClearCart(string userId);
+        Task<CartDto> GetCartByUserIdAsync(string userId);
+        Task<CartDto> CreateUpdateCartAsync(CartDto cart);
+        Task<bool> RemoveFromCartAsync(int cartDetailsId);
+        Task<bool> ClearCartAsync(string userId);
     }
 }
