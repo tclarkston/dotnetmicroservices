@@ -49,7 +49,7 @@ namespace Mango.Services.CartAPI.Controllers
             catch (Exception ex)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>{ ex.ToString() };
+                _response.ErrorMessages = new List<string> { ex.ToString() };
             }
 
             return _response;
@@ -73,11 +73,49 @@ namespace Mango.Services.CartAPI.Controllers
         }
 
         [HttpPost("RemoveCart")]
-        public async Task<object> RemoveCart([FromBody]int cartId)
+        public async Task<object> RemoveCart([FromBody] int cartId)
         {
             try
             {
                 var isSuccess = await _cartRepository.RemoveFromCartAsync(cartId);
+                _response.Result = isSuccess;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string> { ex.ToString() };
+            }
+
+            return _response;
+        }
+
+        [HttpPost("ApplyCoupon")]
+        public async Task<object> ApplyCoupon([FromBody] CartDto model)
+        {
+            try
+            {
+                var isSuccess = await _cartRepository.ApplyCouponAsync(
+                    model.CartHeader.UserId,
+                    model.CartHeader.CouponCode);
+
+                _response.Result = isSuccess;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string> { ex.ToString() };
+            }
+
+            return _response;
+        }
+
+        [HttpPost("RemoveCoupon")]
+        public async Task<object> RemoveCoupon([FromBody] string userId)
+        {
+            try
+            {
+                var isSuccess = await _cartRepository.RemoveCouponAsync(userId);
+
                 _response.Result = isSuccess;
             }
             catch (Exception ex)
