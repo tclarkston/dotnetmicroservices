@@ -9,8 +9,15 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var connection = "DefaultConnection";
+var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+if (env != null && env == "Local")
+{
+    connection = "LocalConnection";
+}
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString(connection)));
 
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
@@ -73,7 +80,7 @@ builder.Services.AddSwaggerGen(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local")
 {
     app.UseSwagger();
     app.UseSwaggerUI();

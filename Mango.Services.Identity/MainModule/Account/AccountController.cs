@@ -259,7 +259,7 @@ namespace IdentityServerHost.Quickstart.UI
                     await _userManager.AddToRoleAsync(user, model.RoleName);
 
                     await _userManager.AddClaimsAsync(user, new Claim[]{
-                            new Claim(JwtClaimTypes.Name, model.Username),
+                            new Claim(JwtClaimTypes.Name, $"{model.FirstName} {model.LastName}"),
                             new Claim(JwtClaimTypes.Email, model.Email),
                             new Claim(JwtClaimTypes.FamilyName, model.LastName),
                             new Claim(JwtClaimTypes.GivenName, model.FirstName),
